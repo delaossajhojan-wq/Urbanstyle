@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">z
+    <title>Tienda de Ropa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+    <button id="carrito-btn">🛒 (<span id="contador">0</span>)</button>
+
+<div id="carrito" class="carrito oculto">
+    <h2>Carrito</h2>
+    <ul id="items-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+
+    
+    <button onclick="realizarPago()">Pagar</button>
+    <button onclick="vaciarCarrito()">Vaciar</button>
+</div>
+
+
+<section class="pedidos">
+    <h2>Mis pedidos</h2>
+    <ul id="lista-pedidos"></ul>
+</section>
+</header>
+
+<h1>Urban Style</h1>
+<section class="buscador">
+    <input type="text" id="input-busqueda" placeholder="Buscar ropa...">
+</section>
+
+<nav>
+    <ul class="menu">
+        <li>
+            <a href="acerca.html">Acerca de nosotros</a>
+        </li>
+
+        <li>
+            <a href="#">Productos</a>
+            <ul class="submenu">
+                <li><a href="pantalones.html">Pantalones</a></li>
+                <li><a href="chaquetas.html">Chaquetas</a></li>
+                <li><a href="camisetas.html">Camisetas</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">Servicios</a>
+            <ul class="submenu">
+                <li><a href="envios.html">Envíos</a></li>
+                <li><a href="devoluciones.html">Devoluciones</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="contacto.html">Contacto</a>
+            <ul class="submenu">
+                <li><a href="formulario.html">Formulario</a></li>
+                
+            </ul>
+        </li>
+    </ul>
+</nav>
+<section class="hero">
+    <h2>Descubre tu estilo</h2>
+    <p>Moda moderna y urbana</p>
+</section>
+
+<section class="productos" id="lista-productos">
+</section>
+
+<div id="carrito" class="carrito oculto">
+    <h2>Carrito</h2>
+    <ul id="items-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button onclick="vaciarCarrito()">Vaciar</button>
+</div>
+
+<footer class="footer">
+    <div class="footer-contenido">
+
+        <div class="footer-col">
+            <h3>Urban Style</h3>
+            <p>Ropa urbana con actitud. Lleva tu estilo al siguiente nivel.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Enlaces</h4>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Envíos</a></li>
+                <li><a href="#">Devoluciones</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <p>📍 Barranquilla, Colombia</p>
+            <p>📧 urbanstyle@gmail.com</p>
+            <p>📱 +57 300 123 4567</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="redes">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">TikTok</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Urban Style | Todos los derechos reservados</p>
+    </div>
+</footer>
+
+
+<script src="tienda.js"></script>
+
+</body>
+</html>
