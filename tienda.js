@@ -1,14 +1,14 @@
 
 const productos = [
-    { id: 1, nombre: "Camiseta oversized", precio: 20000, img: "Oversized1.jpg" },
-    { id: 2, nombre: "Pantalón", precio: 67000, img: "pantalon.jpg" },
-    { id: 3, nombre: "Chaqueta de cuero", precio: 80000, img: "chaqueta hombre.jpg" },
-    { id: 4, nombre: "Camiseta", precio: 28000, img: "CamisetasBasic.jpg" },
-    { id: 5, nombre: "Jean blue", precio: 55000, img: "panta.jpg" },
-    { id: 6, nombre: "Chaqueta", precio: 67000, img: "chaqueta marron.jpg" },
-    { id: 7, nombre: "Camiseta", precio: 20000, img: "negra.jpg" },
-    { id: 8, nombre: "Pantalón", precio: 46000, img: "Pantalon1.jpg" },
-    { id: 9, nombre: "Chaqueta de jean", precio: 38000, img: "66b6e473fd5e4aa1b627e1bbc432f033.jpg" }
+    { id: 1, nombre: "Camiseta oversized", precio: 20000, categoria: "Camiseta", img: "Oversized1.jpg" },
+    { id: 2, nombre: "Pantalón", precio: 67000, categoria: "Pantalón", img: "pantalon.jpg" },
+    { id: 3, nombre: "Chaqueta de cuero", precio: 80000, categoria: "Chaqueta", img: "chaqueta hombre.jpg" },
+    { id: 4, nombre: "Camiseta", precio: 28000, categoria: "Camiseta", img: "CamisetasBasic.jpg" },
+    { id: 5, nombre: "Jean blue", precio: 55000, categoria: "Pantalón", img: "panta.jpg" },
+    { id: 6, nombre: "Chaqueta", precio: 67000, categoria: "Chaqueta", img: "chaqueta marron.jpg" },
+    { id: 7, nombre: "Camiseta", precio: 20000, categoria: "Camiseta", img: "negra.jpg" },
+    { id: 8, nombre: "Pantalón", precio: 46000, categoria: "Pantalón", img: "Pantalon1.jpg" },
+    { id: 9, nombre: "Chaqueta de jean", precio: 38000, categoria: "Chaqueta", img: "66b6e473fd5e4aa1b627e1bbc432f033.jpg" }
 ];
 
 
@@ -18,11 +18,19 @@ let pedidos = [];
 
 const contenedor = document.getElementById("lista-productos");
 const inputBusqueda = document.getElementById("input-busqueda");
+const filtroCategoria = document.getElementById("filtro-categoria");
+const contadorVisitas = document.getElementById("contador-visitas");
+
+
+let visitas = localStorage.getItem("visitas") || 0;
+visitas = parseInt(visitas) + 1;
+localStorage.setItem("visitas", visitas);
+if (contadorVisitas) contadorVisitas.textContent = visitas;
 
 
 function mostrarProductos(lista) {
     contenedor.innerHTML = "";
-    lista.forEach(p => {
+    lista.forEach((p) => {
         contenedor.innerHTML += `
             <div class="producto">
                 <img src="${p.img}" alt="${p.nombre}">
@@ -54,7 +62,7 @@ function actualizarCarrito() {
         suma += p.precio;
         lista.innerHTML += `
             <li>
-                ${p.nombre} - $${p.precio} 
+                ${p.nombre} - $${p.precio}
                 <button onclick="eliminarProducto(${index})">Eliminar</button>
             </li>
         `;
@@ -87,12 +95,9 @@ function realizarPago() {
         alert("El carrito está vacío ❌");
         return;
     }
-
     pedidos.push([...carrito]);
     mostrarPedidos();
-
     alert("Pago realizado con éxito 💳");
-
     carrito = [];
     actualizarCarrito();
 }
@@ -101,7 +106,6 @@ function realizarPago() {
 function mostrarPedidos() {
     const lista = document.getElementById("lista-pedidos");
     lista.innerHTML = "";
-
     pedidos.forEach((pedido, i) => {
         lista.innerHTML += `<li>Pedido ${i + 1} - ${pedido.length} productos</li>`;
     });
@@ -111,9 +115,24 @@ function mostrarPedidos() {
 if (inputBusqueda) {
     inputBusqueda.addEventListener("input", () => {
         const texto = inputBusqueda.value.toLowerCase();
-        const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
-        mostrarProductos(filtrados);
+        filtrarYMostrar(texto, filtroCategoria.value);
     });
+}
+
+
+if (filtroCategoria) {
+    filtroCategoria.addEventListener("change", () => {
+        filtrarYMostrar(inputBusqueda.value.toLowerCase(), filtroCategoria.value);
+    });
+}
+
+
+function filtrarYMostrar(texto, categoria) {
+    let filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
+    if (categoria !== "todos") {
+        filtrados = filtrados.filter(p => p.categoria === categoria);
+    }
+    mostrarProductos(filtrados);
 }
 
 
